@@ -222,13 +222,13 @@
     btn42.href = LINKS.v42;
     btn41.href = LINKS.v41;
 
-    const API_BASE = 'https://counterapi.dev';
+    const NS = 'system32_github_io_unique';
     async function syncRealCounter(verKey, elId, increment) {
       const el = document.getElementById(elId);
       try {
         const endpoint = increment
-          ? API_BASE + '/' + verKey + '/up'
-          : API_BASE + '/' + verKey;
+          ? 'https://counterapi.dev' + NS + '/' + verKey + '/up'
+          : 'https://counterapi.dev' + NS + '/' + verKey;
         const res = await fetch(endpoint);
         const data = await res.json();
         if (typeof data.count === 'number') {
@@ -239,10 +239,10 @@
       }
     }
 
-    btn42.addEventListener('click', function () { syncRealCounter('downloads-v42', 'cnt-v42', true); });
-    btn41.addEventListener('click', function () { syncRealCounter('downloads-v41', 'cnt-v41', true); });
-    syncRealCounter('downloads-v42', 'cnt-v42', false);
-    syncRealCounter('downloads-v41', 'cnt-v41', false);
+    btn42.addEventListener('click', function () { syncRealCounter('v4_2', 'cnt-v42', true); });
+    btn41.addEventListener('click', function () { syncRealCounter('v4_1', 'cnt-v41', true); });
+    syncRealCounter('v4_2', 'cnt-v42', false);
+    syncRealCounter('v4_1', 'cnt-v41', false);
   </script>
 </body>
 </html>
