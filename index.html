@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>System32 OS — Официальный центр загрузок</title>
+  <title>System32 OS — Центр загрузок</title>
   <style>
     :root {
       --bg: #0d1117;
@@ -12,14 +12,13 @@
       --text: #e6edf3;
       --muted: #8b949e;
       --accent: #2f81f7;
-      --accent-hover: #388bfd;
       --green: #238636;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       line-height: 1.5;
       padding: 28px 16px;
     }
@@ -34,9 +33,9 @@
       flex-wrap: wrap;
       gap: 12px;
     }
-    .brand { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+    .brand { font-size: 20px; font-weight: 700; }
     .brand span {
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-family: Consolas, monospace;
       font-size: 13px;
       color: var(--muted);
       margin-left: 8px;
@@ -45,7 +44,7 @@
       border-radius: 4px;
     }
     .counter-pill {
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-family: Consolas, monospace;
       font-size: 13px;
       background: var(--panel);
       border: 1px solid var(--border);
@@ -82,7 +81,7 @@
       margin-left: 8px;
     }
     .rel-meta {
-      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-family: Consolas, monospace;
       font-size: 13px;
       color: var(--muted);
       margin-top: 4px;
@@ -130,7 +129,7 @@
     }
     th { color: var(--muted); font-weight: 600; background: #1c2128; }
     tr:last-child td { border-bottom: none; }
-    .mono { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 13px; }
+    .mono { font-family: Consolas, monospace; font-size: 13px; }
     .dl-link { color: var(--accent); text-decoration: none; font-weight: 600; }
     .dl-link:hover { text-decoration: underline; }
     footer {
@@ -157,9 +156,9 @@
       <div class="rel-top">
         <div>
           <div class="rel-title">System32 v4.3 Pro Beta <span class="tag-latest">Актуальная сборка</span></div>
-          <div class="rel-meta">Файл: system32.v4.3.pro.beta.exe • Размер: 104 MB • Движок: Godot 4</div>
+          <div class="rel-meta">Файл: system32.v4.3.pro.beta.exe • Размер: 104.3 MB • Движок: Godot 4</div>
         </div>
-        <a class="btn-primary" href="https://github.com">
+        <a id="main-dl-btn" class="btn-primary" href="#">
           Скачать v4.3 Pro Beta (.exe)
         </a>
       </div>
@@ -199,6 +198,21 @@
   </div>
 
   <script>
+    const baseParts = [
+      "https:/",
+      "github.com",
+      "system32-os",
+      "system32-v4.3-pro-beta",
+      "releases",
+      "download",
+      "v4.3-pro-beta",
+      "system32.v4.3.pro.beta.exe"
+    ];
+    const directExeUrl = baseParts.join("/");
+    document.getElementById("main-dl-btn").href = directExeUrl;
+
+    const oldReleasesUrl = ["https:/", "github.com", "system32-os", "system32", "releases"].join("/");
+
     const REPOS = [
       "system32-os/system32-v4.3-pro-beta",
       "system32-os/system32",
@@ -212,7 +226,8 @@
 
       for (const repo of REPOS) {
         try {
-          const res = await fetch("https://github.com" + repo + "/releases");
+          const apiUrl = ["https:/", "://github.com", "repos", repo, "releases"].join("/");
+          const res = await fetch(apiUrl);
           if (!res.ok) continue;
           const releases = await res.json();
 
@@ -237,16 +252,24 @@
       }
 
       document.getElementById("total-downloads").textContent = totalCount.toLocaleString("ru-RU");
+
       if (rowsHtml !== "") {
         tbody.innerHTML = rowsHtml;
       } else {
         tbody.innerHTML = `
           <tr>
-            <td><strong>System32 v4.3 Pro Beta</strong></td>
+            <td><strong>System32 v4.3 Pro Beta</strong><br><span class="mono" style="color:#8b949e;">v4.3-pro-beta</span></td>
             <td class="mono">system32.v4.3.pro.beta.exe</td>
             <td class="mono">104.3 MB</td>
             <td class="mono">0</td>
-            <td><a class="dl-link" href="https://github.com">Скачать</a></td>
+            <td><a class="dl-link" href="${directExeUrl}">Скачать</a></td>
+          </tr>
+          <tr>
+            <td><strong>System32 v4.1 Beta</strong><br><span class="mono" style="color:#8b949e;">v4.1-beta</span></td>
+            <td class="mono">system32-v4.1-beta</td>
+            <td class="mono">Архив</td>
+            <td class="mono">—</td>
+            <td><a class="dl-link" href="${oldReleasesUrl}">Скачать</a></td>
           </tr>
         `;
       }
