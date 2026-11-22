@@ -3,149 +3,256 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>System32 v4.3 Pro Beta — Официальный сайт</title>
+  <title>System32 OS — Официальный центр загрузок</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    :root {
+      --bg: #0d1117;
+      --panel: #161b22;
+      --border: #30363d;
+      --text: #e6edf3;
+      --muted: #8b949e;
+      --accent: #2f81f7;
+      --accent-hover: #388bfd;
+      --green: #238636;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      min-height: 100vh;
-      background: radial-gradient(circle at 55% 35%, #1d5fd6 0%, #102a68 45%, #060b19 100%);
-      color: #f3f7ff;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.5;
+      padding: 28px 16px;
+    }
+    .wrap { max-width: 920px; margin: 0 auto; }
+    header {
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
-      padding: 40px 16px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-    .container { max-width: 880px; width: 100%; }
-    .hero {
-      background: rgba(12, 20, 38, 0.85);
-      border: 1px solid rgba(110, 175, 255, 0.35);
-      border-radius: 22px;
-      padding: 40px 28px;
-      text-align: center;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
-      backdrop-filter: blur(12px);
-    }
-    .badge {
-      display: inline-block;
-      background: rgba(36, 130, 255, 0.22);
-      border: 1px solid rgba(90, 170, 255, 0.5);
-      color: #8cc4ff;
-      padding: 6px 16px;
-      border-radius: 999px;
+    .brand { font-size: 20px; font-weight: 700; letter-spacing: -0.3px; }
+    .brand span {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
       font-size: 13px;
-      font-weight: 600;
+      color: var(--muted);
+      margin-left: 8px;
+      padding: 2px 8px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+    }
+    .counter-pill {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 13px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      color: var(--muted);
+    }
+    .counter-pill strong { color: #3fb950; font-size: 14px; }
+    .main-release {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .rel-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 16px;
       margin-bottom: 16px;
     }
-    h1 { font-size: 38px; margin-bottom: 12px; letter-spacing: -0.5px; }
-    .subtitle { color: #b8c9e8; font-size: 17px; max-width: 640px; margin: 0 auto 28px; line-height: 1.5; }
-    .dl-btn {
+    .rel-title { font-size: 26px; font-weight: 700; }
+    .tag-latest {
       display: inline-block;
-      padding: 18px 34px;
-      background: linear-gradient(135deg, #1d7dfa, #6d3df2);
-      color: #fff;
-      font-size: 18px;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 600;
+      color: #3fb950;
+      border: 1px solid rgba(63, 185, 80, 0.4);
+      padding: 2px 8px;
+      border-radius: 4px;
+      vertical-align: middle;
+      margin-left: 8px;
+    }
+    .rel-meta {
+      font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
+      font-size: 13px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+    .btn-primary {
+      display: inline-block;
+      background: var(--green);
+      color: #ffffff;
       text-decoration: none;
-      border-radius: 14px;
-      box-shadow: 0 10px 28px rgba(29, 125, 250, 0.45);
-      transition: transform 0.15s ease;
-    }
-    .dl-btn:hover { transform: translateY(-2px); }
-    .stats-bar {
-      margin-top: 18px;
-      display: inline-flex;
-      gap: 18px;
-      flex-wrap: wrap;
-      justify-content: center;
-      background: rgba(255, 255, 255, 0.06);
-      padding: 10px 20px;
-      border-radius: 12px;
+      font-weight: 600;
       font-size: 15px;
-      color: #a9ccf8;
+      padding: 12px 22px;
+      border-radius: 6px;
+      border: 1px solid rgba(240, 246, 252, 0.1);
     }
-    .stats-bar strong { color: #4ef59b; font-size: 17px; }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      margin-top: 24px;
+    .btn-primary:hover { background: #2ea043; }
+    .changelog {
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+      margin-top: 16px;
+      font-size: 14px;
+      color: #c9d1d9;
     }
-    .card {
-      background: rgba(12, 20, 38, 0.78);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 16px;
-      padding: 20px;
+    .changelog ul { padding-left: 20px; margin-top: 8px; }
+    .changelog li { margin-bottom: 4px; }
+    h2 {
+      font-size: 18px;
+      margin-bottom: 12px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--border);
     }
-    .card h3 { font-size: 18px; margin-bottom: 8px; color: #7bb8ff; }
-    .card p { font-size: 14px; color: #c4d3ec; line-height: 1.45; }
-    footer { margin-top: 32px; font-size: 13px; color: #7e94ba; text-align: center; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+    th { color: var(--muted); font-weight: 600; background: #1c2128; }
+    tr:last-child td { border-bottom: none; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Consolas, monospace; font-size: 13px; }
+    .dl-link { color: var(--accent); text-decoration: none; font-weight: 600; }
+    .dl-link:hover { text-decoration: underline; }
+    footer {
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="hero">
-      <div class="badge">Godot 4 Engine • Windows 64-bit • v4.3 Pro Beta</div>
-      <h1>System32 v4.3 Pro Beta</h1>
-      <p class="subtitle">
-        3D-симулятор операционной системы, квартиры и живого города: собирай ПК с RTX,
-        играй в 3D CS2 Mirage и Minecraft с Булавой и TNT, выходи на улицы города!
-      </p>
+  <div class="wrap">
+    <header>
+      <div class="brand">System32 OS <span>Windows x64</span></div>
+      <div class="counter-pill">Всего скачиваний сборок: <strong id="total-downloads">0</strong></div>
+    </header>
 
-      <a class="dl-btn"
-         href="https://github.com">
-        ⬇️ Скачать System32 v4.3 Pro Beta (.exe • 104 MB)
-      </a>
+    <section class="main-release">
+      <div class="rel-top">
+        <div>
+          <div class="rel-title">System32 v4.3 Pro Beta <span class="tag-latest">Актуальная сборка</span></div>
+          <div class="rel-meta">Файл: system32.v4.3.pro.beta.exe • Размер: 104 MB • Движок: Godot 4</div>
+        </div>
+        <a class="btn-primary" href="https://github.com">
+          Скачать v4.3 Pro Beta (.exe)
+        </a>
+      </div>
+      <div class="changelog">
+        <strong>Что нового в v4.3 Pro Beta:</strong>
+        <ul>
+          <li>Полноценный 3D-город с жилой квартирой, магазинами, трафиком, ДТП, уличными конфликтами и Ragdoll-физикой.</li>
+          <li>3D Counter-Strike 2 на карте Mirage с ботами, сменой скинов, анимацией перезарядки и меню закупки (B).</li>
+          <li>3D Minecraft с процедурной генерацией чанков, оптимизацией граней, режимом Креатива (/gamemode), Булавой, Трезубцем и TNT.</li>
+          <li>Обновлённый рабочий стол, магазин комплектующих SimChrome и встроенный помощник Саша Pro.</li>
+        </ul>
+      </div>
+    </section>
 
-      <br />
-      <div class="stats-bar">
-        <span>📊 Реальных скачиваний игроками: <strong id="dl-count">загрузка...</strong></span>
-        <span>🛡️ 100% безопасно (Sandbox)</span>
-      </div>
-    </div>
+    <h2>Архив всех версий и релизов</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Версия</th>
+          <th>Файл сборки</th>
+          <th>Размер</th>
+          <th>Скачиваний</th>
+          <th>Загрузка</th>
+        </tr>
+      </thead>
+      <tbody id="releases-body">
+        <tr>
+          <td colspan="5" class="mono" style="color:#8b949e;">Загрузка списка релизов из репозиториев...</td>
+        </tr>
+      </tbody>
+    </table>
 
-    <div class="grid">
-      <div class="card">
-        <h3>🏙️ 3D-квартира и город</h3>
-        <p>Выходи из-за ПК на улицу, заходи в кварталы с магазинами, уворачивайся от машин и участвуй в уличных событиях.</p>
-      </div>
-      <div class="card">
-        <h3>🔫 3D CS2 (Карта Mirage)</h3>
-        <p>Полноценная карта Mirage со скинами, осмотром оружия, анимацией перезарядки, приседающими ботами и магазином на B.</p>
-      </div>
-      <div class="card">
-        <h3>⛏️ 3D Minecraft Sandbox</h3>
-        <p>Генерация мира, оптимизация граней, режим Креатива и читы (/gamemode), Булава с ударом сверху, Трезубец и взрывы TNT.</p>
-      </div>
-    </div>
-
-    <footer>System32 OS Simulator • 2026 • Сделано на Godot 4</footer>
+    <footer>
+      <span>System32 OS Project • 2026</span>
+      <span>Репозиторий: ://github.com</span>
+    </footer>
   </div>
 
   <script>
-    async function loadRealDownloads() {
-      const repos = [
-        "system32-os/system32-v4.3-pro-beta",
-        "system32-os/system32",
-        "system32-os/system32-os.github.io"
-      ];
-      let total = 0;
-      for (const repo of repos) {
+    const REPOS = [
+      "system32-os/system32-v4.3-pro-beta",
+      "system32-os/system32",
+      "system32-os/system32-os.github.io"
+    ];
+
+    async function loadAllReleases() {
+      const tbody = document.getElementById("releases-body");
+      let totalCount = 0;
+      let rowsHtml = "";
+
+      for (const repo of REPOS) {
         try {
           const res = await fetch("https://github.com" + repo + "/releases");
           if (!res.ok) continue;
           const releases = await res.json();
+
           for (const rel of releases) {
-            if (rel.assets) {
-              for (const asset of rel.assets) {
-                total += asset.download_count || 0;
-              }
+            if (!rel.assets || rel.assets.length === 0) continue;
+            for (const asset of rel.assets) {
+              const count = asset.download_count || 0;
+              totalCount += count;
+              const mb = (asset.size / (1024 * 1024)).toFixed(1) + " MB";
+              rowsHtml += `
+                <tr>
+                  <td><strong>${rel.name || rel.tag_name}</strong><br><span class="mono" style="color:#8b949e;">${rel.tag_name}</span></td>
+                  <td class="mono">${asset.name}</td>
+                  <td class="mono">${mb}</td>
+                  <td class="mono" style="color:#3fb950;">${count.toLocaleString("ru-RU")}</td>
+                  <td><a class="dl-link" href="${asset.browser_download_url}">Скачать</a></td>
+                </tr>
+              `;
             }
           }
         } catch (e) {}
       }
-      document.getElementById("dl-count").textContent = total.toLocaleString("ru-RU");
+
+      document.getElementById("total-downloads").textContent = totalCount.toLocaleString("ru-RU");
+      if (rowsHtml !== "") {
+        tbody.innerHTML = rowsHtml;
+      } else {
+        tbody.innerHTML = `
+          <tr>
+            <td><strong>System32 v4.3 Pro Beta</strong></td>
+            <td class="mono">system32.v4.3.pro.beta.exe</td>
+            <td class="mono">104.3 MB</td>
+            <td class="mono">0</td>
+            <td><a class="dl-link" href="https://github.com">Скачать</a></td>
+          </tr>
+        `;
+      }
     }
-    loadRealDownloads();
+
+    loadAllReleases();
   </script>
 </body>
 </html>
